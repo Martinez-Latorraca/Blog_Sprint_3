@@ -12,7 +12,8 @@ async function show(req, res) {
 async function store(req, res) {
   const comments = await Comment.create({
       fullname: req.body.fullname,
-      comment: req.body.comment
+      comment: req.body.comment,
+      articleId: res.params.id
   });
 }
 
