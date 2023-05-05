@@ -36,20 +36,20 @@
             </tr>
           </thead>
           <tbody>
-            <% for(article of articleList) { %>
+            <% for(let i = 0; i < 10 ; i++) { %>
             <tr>
-              <th scope="row"><%= user.id %></th>
-              <td><%= article.title %></td>
-              <td><%= article.content %></td>
-              <td><%= article.image %></td>
-              <td><%= article.createdAt %></td>
-              <td><%= article.user.firstname %></td>
+              <th scope="row"><%= adminList[i].id %></th>
+              <td><%= adminList[i].title %></td>
+              <td><%= adminList[i].content %></td>
+              <td><%= adminList[i].image %></td>
+              <td><%= adminList[i].createdAt %></td>
+              <td><%= `${adminList[i].user.firstname} ${adminList[i].user.lastname}` %></td>
               <td>
                 <div class="gap-2 d-flex justify-content-center">
                   <div>
                     <a
                       class="btn btn-primary btn-sm"
-                      href="/usuarios/editar/<%= article.id %>"
+                      href="/usuarios/editar/<%= adminList[i].id %>"
                       role="button"
                     >
                       Edit
@@ -58,7 +58,7 @@
                   <div>
                     <a
                       class="btn btn-danger btn-sm"
-                      href="/usuarios/eliminar/<%= article.id %>"
+                      href="/usuarios/eliminar/<%= adminList[i].id %>"
                       role="button"
                     >
                       Delete

@@ -12,13 +12,13 @@ async function index(req, res) {
 // Display the specified resource.
 async function show(req, res) {
   const id = req.params.id;
-  const comments = await Comment.findAll({where:{ articleId: id  }, include: "article"});
-  console.log(comments)
+  const comments = await Comment.findAll({ where: { articleId: id }, include: "article" });
+  console.log(comments);
   const singleArticle = await Article.findByPk(id, { include: "user" });
   res.render("article", {
     singleArticle,
     id,
-    comments
+    comments,
   });
 }
 
@@ -37,6 +37,13 @@ async function update(req, res) {}
 // Remove the specified resource from storage.
 async function destroy(req, res) {}
 
+async function showAdmin(req, res) {
+  const adminList = await Article.findAll({ include: "user" });
+  res.render("admin", {
+    adminList,
+  });
+}
+
 // Otros handlers...
 // ...
 
@@ -48,4 +55,5 @@ module.exports = {
   edit,
   update,
   destroy,
+  showAdmin,
 };
