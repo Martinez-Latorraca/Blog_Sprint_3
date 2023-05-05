@@ -15,6 +15,7 @@ async function show(req, res) {
   const singleArticle = await Article.findByPk(id, { include: "user" });
   res.render("article", {
     singleArticle,
+    id
   });
 }
 
