@@ -3,7 +3,9 @@ const { Article } = require("../models");
 // Display a listing of the resource.
 async function index(req, res) {
   const articleList = await Article.findAll({});
-  res.render("home");
+  res.render("home", {
+    articleList
+  });
 }
 
 // Display the specified resource.

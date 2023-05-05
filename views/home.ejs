@@ -8,10 +8,10 @@
 </head>
 <body>
      <% for(let i = 0; i < 4 ; i++){%>
-        <h1><%= artcile[i].title  %></h1>
-        <p></p>
-        <p></p>
-        <p></p>
+        <h1><%= articleList[i].title  %></h1>
+        <p><%= articleList[i].content %></p>
+        <p><%= articleList[i].creatAt %></p>
+        <!-- <p><%= articleList[i].author %></p> aca iria el autor-->
         
 
         <% } %>
