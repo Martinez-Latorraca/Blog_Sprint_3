@@ -1,14 +1,6 @@
 const { Article, Comment } = require("../models");
 
-// Display the specified resource.
-async function show(req, res) {
-  const comments = await Comment.findAll({where: { articleId: req.body.id}},{ include: "article" });
-  console.log(comments)
-  res.render("article", {
-    comments,
-  });
-}
-
+async function show(req, res) {}
 // Store a newly created resource in storage.
 async function store(req, res) {
   const comments = await Comment.create({
