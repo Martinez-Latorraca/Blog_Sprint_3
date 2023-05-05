@@ -13,12 +13,8 @@ async function index(req, res) {
 async function show(req, res) {
   const id = req.params.id;
   const singleArticle = await Article.findByPk(id, { include: "user" });
-  //const articleList = await Article.findAll({ include: "user" });
-  console.log(singleArticle);
   res.render("article", {
     singleArticle,
-    //articleList,
-    //id,
   });
 }
 
