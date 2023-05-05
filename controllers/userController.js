@@ -2,17 +2,21 @@ const { User } = require("../models");
 
 // Display a listing of the resource.
 async function index(req, res) {
-  const userList = await User.create({
-    firstname: "María",
-    lastname: "López",
-  });
+  const userList = await User.findAll({});
+  res.json(userList);
 }
 
 // Display the specified resource.
 async function show(req, res) {}
 
 // Show the form for creating a new resource
-async function create(req, res) {}
+async function create(req, res) {
+  //   const userList = await User.create({
+  //    firstname: "María",
+  //    lastname: "López",
+  //  });
+  res.json(userList);
+}
 
 // Store a newly created resource in storage.
 async function store(req, res) {}
