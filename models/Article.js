@@ -27,6 +27,4 @@ class Article extends Model {
   }
 }
 
-//User.belongsTo(Article);
-
 module.exports = Article;
