@@ -11,9 +11,10 @@ async function show(req, res) {}
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  //   const userList = await User.create({
+  //   const user = await User.create({
   //    firstname: "María",
   //    lastname: "López",
+
   //  });
   res.json(userList);
 }
