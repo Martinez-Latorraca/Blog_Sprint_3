@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
+const { User } = require("./User");
 
 class Article extends Model {
   static initModel(sequelize) {
@@ -25,5 +26,7 @@ class Article extends Model {
     return Article;
   }
 }
+
+//User.belongsTo(Article);
 
 module.exports = Article;
