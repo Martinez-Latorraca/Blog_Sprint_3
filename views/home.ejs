@@ -7,13 +7,11 @@
     <title>Home</title>
 </head>
 <body>
-     <% for(let i = 0; i < 4 ; i++){%>
-        <h1><%= articleList[i].title  %></h1>
+     <% for(let i = 0; i < 1 ; i++){%>
+        <h1><%=articleList[i].title  %></h1>
         <p><%= articleList[i].content %></p>
         <p><%= articleList[i].createdAt %></p>
-        <!-- <p><%= articleList[i].author %></p> aca iria el autor-->
-        
-
+        <p><%= `${articleList[i].user.firstname} ${articleList[i].user.lastname}` %></p> 
         <% } %>
 </body>
 </html>
