@@ -10,7 +10,10 @@ async function show(req, res) {
 
 // Store a newly created resource in storage.
 async function store(req, res) {
-  const comments = await Comment.create({});
+  const comments = await Comment.create({
+      fullname: req.body.fullname,
+      comment: req.body.comment
+  });
 }
 
 module.exports = {
