@@ -48,7 +48,7 @@
         </div>
       </form>
       <div>
-        <h2>Comments</h2>
+        <h2>Comments <%=`(${comments.length})`%></h2>
         <% for(const comment of comments){%>
           <p><%= comment.content %></p>
           <p><%= comment.fullname %></p>
