@@ -10,7 +10,7 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
-    <title>Document</title>
+    <title>Admin</title>
   </head>
   <body>
     <section class="container">
@@ -42,7 +42,7 @@
               <td><%= adminList[i].title %></td>
               <td><%=adminList[i].content.slice(0,60)+ "..." %></td>
               <td><%= adminList[i].image %></td>
-              <td><%= adminList[i].createdAt %></td>
+              <td><%= format(new Date(String(adminList[i].createdAt)), "yyyy'-'MM'-'dd kk:mm:ss"); %></td>
               <td><%= `${adminList[i].user.firstname} ${adminList[i].user.lastname}` %></td>
               <td>
                 <div class="gap-2 d-flex justify-content-center">

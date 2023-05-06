@@ -1,11 +1,14 @@
 const { Article, Comment } = require("../models");
-
+const {format} = require("date-fns");
+const { es} = require("date-fns/locale");
 // Display a listing of the resource.
 async function index(req, res) {
   const articleList = await Article.findAll({ include: "user" });
 
   res.render("home", {
     articleList,
+    format,
+    es,
   });
 }
 
@@ -38,9 +41,14 @@ async function update(req, res) {}
 async function destroy(req, res) {}
 
 async function showAdmin(req, res) {
+  
   const adminList = await Article.findAll({ include: "user" });
+  
+  //const date = format(new Date(String(adminList[i].createdAt)), "dd MMMM yyyy");
+  
   res.render("admin", {
     adminList,
+    format
   });
 }
 
