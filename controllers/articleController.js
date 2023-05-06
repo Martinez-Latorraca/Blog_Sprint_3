@@ -38,13 +38,16 @@ async function edit(req, res) {}
 async function update(req, res) {}
 
 // Remove the specified resource from storage.
-async function destroy(req, res) {}
+async function destroy(req, res) {
+        const {id} = req.params;
+        const results = await Article.destroy({where: { id: id }});
+        console.log(`Se borraron: ${results.affectedRows} filas`);
+        res.redirect(200, "/articulos");
+}
 
 async function showAdmin(req, res) {
   
   const adminList = await Article.findAll({ include: "user" });
-  
-  //const date = format(new Date(String(adminList[i].createdAt)), "dd MMMM yyyy");
   
   res.render("admin", {
     adminList,
