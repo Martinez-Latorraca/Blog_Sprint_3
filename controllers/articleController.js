@@ -1,6 +1,6 @@
 const { Article, Comment } = require("../models");
-const {format} = require("date-fns");
-const { es} = require("date-fns/locale");
+const { format } = require("date-fns");
+const { es } = require("date-fns/locale");
 // Display a listing of the resource.
 async function index(req, res) {
   const articleList = await Article.findAll({ include: "user" });
@@ -32,26 +32,28 @@ async function create(req, res) {}
 async function store(req, res) {}
 
 // Show the form for editing the specified resource.
-async function edit(req, res) {}
+async function edit(req, res) {
+  const singleArticle = await Article.findByPk(id, { include: "user" });
+  res.render("adminEdit", singleArticle);
+}
 
 // Update the specified resource in storage.
 async function update(req, res) {}
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
-        const {id} = req.params;
-        const results = await Article.destroy({where: { id: id }});
-        console.log(`Se borraron: ${results.affectedRows} filas`);
-        res.redirect(200, "/articulos");
+  const { id } = req.params;
+  const results = await Article.destroy({ where: { id: id } });
+  console.log(`Se borraron: ${results.affectedRows} filas`);
+  res.redirect(200, "/articulos");
 }
 
 async function showAdmin(req, res) {
-  
   const adminList = await Article.findAll({ include: "user" });
-  
+
   res.render("admin", {
     adminList,
-    format
+    format,
   });
 }
 
