@@ -10,9 +10,10 @@
     <% for(let i = 0; i < 10 ; i++){%>
     <h1><%=articleList[i].title %></h1>
     <p><%= articleList[i].content %></p>
-    <p><%="Creado por "+ articleList[i].user.firstname +" "+ articleList[i].user.lastname + " el " +
-    format(new Date(String(articleList[i].createdAt)), "dd' de 'MMMM', 'yyyy", {locale: es}) %></p>
-    <p><%= `${articleList[i].user.firstname} ${articleList[i].user.lastname}` %></p>
+    <p>
+      <%="Creado por "+ articleList[i].user.firstname +" "+ articleList[i].user.lastname + " el " +
+      format(new Date(String(articleList[i].createdAt)), "dd' de 'MMMM', 'yyyy", {locale: es}) %>
+    </p>
     <% } %>
   </body>
 </html>
