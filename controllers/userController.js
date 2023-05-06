@@ -15,7 +15,7 @@ async function create(req, res) {
     firstname: "Braulio",
     lastname: "González",
   });
-  res.json(userList);
+  res.redirect("/articulos");
 }
 
 // Store a newly created resource in storage.
