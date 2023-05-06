@@ -10,7 +10,7 @@ router.get("/crear", articleController.create);
 router.post("/", articleController.store);
 router.get("/:id", articleController.show);
 router.get("/:id/editar", articleController.edit);
-router.patch("/:id", articleController.update);
+router.post("/:id/editar", articleController.update);
 router.get("/eliminar/:id", articleController.destroy);
 
 module.exports = router;
