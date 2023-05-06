@@ -40,7 +40,7 @@
             <tr>
               <th scope="row"><%= adminList[i].id %></th>
               <td><%= adminList[i].title %></td>
-              <td><%= adminList[i].content %></td>
+              <td><%=adminList[i].content.slice(0,60)+ "..." %></td>
               <td><%= adminList[i].image %></td>
               <td><%= adminList[i].createdAt %></td>
               <td><%= `${adminList[i].user.firstname} ${adminList[i].user.lastname}` %></td>
