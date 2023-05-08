@@ -8,13 +8,15 @@
       url('/img/<%= singleArticle.image %>');
   "
 >
-  <div>
-    <h1 style="color: rgb(255, 255, 255)"><%= singleArticle.title %></h1>
-  </div>
-  <div>
-    <p style="color: rgb(255, 255, 255)">
-      <%="Creado por "+ singleArticle.user.firstname +" "+ singleArticle.user.lastname + " el " +
-      format(new Date(String(singleArticle.createdAt)), " dd' de 'MMMM' , 'yyyy", {locale: es}) %>
-    </p>
+  <div class="container">
+    <div>
+      <h1 style="color: rgb(255, 255, 255)"><%= singleArticle.title %></h1>
+    </div>
+    <div>
+      <p style="color: rgb(255, 255, 255)">
+        <%="Creado por "+ singleArticle.user.firstname +" "+ singleArticle.user.lastname + " el " +
+        format(new Date(String(singleArticle.createdAt)), " dd' de 'MMMM' , 'yyyy", {locale: es}) %>
+      </p>
+    </div>
   </div>
 </div>
