@@ -16,7 +16,7 @@
   <body>
     <section><%- include("partials/navbar")%></section>
     <section><%- include("partials/header") %></section>
-    <section class="container p-5">
+    <section class="container p-5 w-50">
       <div>
         <p><%=singleArticle.content %></p>
       </div>
@@ -51,10 +51,17 @@
           <hr class="my-5" />
         </form>
         <div>
-          <h2>Comments <%=`(${comments.length})`%></h2>
+          <div class="mb-3">
+            <h2>Comments <%=`(${comments.length})`%></h2>
+          </div>
           <% for(const comment of comments){%>
-          <p>"<%= comment.content %>"</p>
-          <p style="color: rgb(84, 84, 84); font-size: 80%"><%= comment.fullname %></p>
+          <div>
+            <p class="m-0">"<%= comment.content %>"</p>
+            <p style="color: rgb(84, 84, 84); font-size: 90%; font-style: italic">
+              <%= comment.fullname %>
+            </p>
+          </div>
+          <hr class="my-2" />
           <% } %>
         </div>
       </div>
