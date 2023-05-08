@@ -93,7 +93,7 @@ async function update(req, res) {
       { where: { id: id } },
     );
   });
-  return res.redirect("/articulos");
+  return res.redirect("/admin");
 }
 
 // Remove the specified resource from storage.
