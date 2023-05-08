@@ -1,6 +1,9 @@
 const { Article, Comment, User } = require("../models");
 const { format } = require("date-fns");
 const { es } = require("date-fns/locale");
+const formidable = require("formidable");
+const path = require("path");
+
 // Display a listing of the resource.
 async function index(req, res) {
   const articleList = await Article.findAll({ include: "user" });
@@ -40,29 +43,21 @@ async function edit(req, res) {
 
 // Update the specified resource in storage.
 async function update(req, res) {
-  const { title, authorFirst, content, image } = req.body;
-  const user = await User.findOne({
-    where: {
-      firstname: authorFirst,
-    },
+  const form = formidable({
+    multiples: true,
+    uploadDir: __dirname + "/../public/img",
+    keepExtensions: true,
   });
-  const userId = user.id;
-  const result = await Article.update(
-    {
-      title,
-      content,
-      image,
-      userId,
-    },
-    {
-      where: {
-        id: req.params.id,
-      },
-    },
-    { include: "user" },
-  );
 
-  res.redirect("/articulos");
+  form.parse(req, async (err, fields, files) => {
+    const { title, content } = fields;
+    await Article.create({
+      title: title,
+      content: content,
+      image: files["image"].newFilename,
+    });
+  });
+  return res.redirect("/articulos");
 }
 
 // Remove the specified resource from storage.
@@ -95,3 +90,27 @@ module.exports = {
   destroy,
   showAdmin,
 };
+
+/* 
+const { title, authorFirst, content, image } = req.body;
+  const user = await User.findOne({
+    where: {
+      firstname: authorFirst,
+    },
+  });
+  const userId = user.id;
+  const result = await Article.update(
+    {
+      title,
+      content,
+      image,
+      userId,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    },
+    { include: "user" },
+  );
+  */
