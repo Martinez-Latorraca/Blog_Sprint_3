@@ -26,8 +26,8 @@
       </div>
       <form method="post" action="/comentarios">
         <div class="pb-3">
-          <div>
-            <label for="fullname" class="form-label">Add your comment</label>
+          <div class="mt-3">
+            <label for="fullname" class="form-label" style="font-weight: bold;font-size: 2rem;">Add your comment</label>
             <input
               name="fullname"
               type="text"
@@ -37,7 +37,7 @@
               aria-describedby="userName"
             />
           </div>
-          <div class="form-floating">
+          <div class="form-floating mt-3" >
             <textarea
               name="content"
               class="form-control"
@@ -45,7 +45,7 @@
               style="height: 100px"
             ></textarea>
           </div>
-          <div>
+          <div class="mt-3 w-100">
             <input type="hidden" name="id" value="<%=id%>" />
             <button type="submit" class="btn btn-primary">Send</button>
             <hr>
@@ -54,8 +54,8 @@
         <div>
           <h2>Comments <%=`(${comments.length})`%></h2>
           <% for(const comment of comments){%>
-          <p><%= comment.content %></p>
-          <p><%= comment.fullname %></p>
+          <p>"<%= comment.content %>"</p>
+          <p style="color:rgb(84, 84, 84); font-size: 80%;"><%= comment.fullname %></p>
           <% } %>
         </div>
         </div>
