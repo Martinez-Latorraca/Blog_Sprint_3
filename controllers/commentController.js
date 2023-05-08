@@ -8,7 +8,7 @@ async function store(req, res) {
     content: req.body.content,
     articleId: req.body.id,
   });
-  console.log(res);
+
   res.redirect(`/articulos/${comments.articleId}`);
 }
 
