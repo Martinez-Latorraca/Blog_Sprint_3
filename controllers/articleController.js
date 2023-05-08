@@ -6,7 +6,7 @@ const formidable = require("formidable");
 // Display a listing of the resource.
 async function index(req, res) {
   const articleList = await Article.findAll({ include: "user" });
-  console.log(articleList[0].user);
+  console.log(articleList[0].user.dataValues.firstname)
   res.render("home", {
     articleList,
     format,
