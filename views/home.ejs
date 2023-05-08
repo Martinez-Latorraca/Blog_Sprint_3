@@ -16,7 +16,7 @@
     <section><%- include("partials/navbar") %></section>
 
     <div
-      class="text-center py-5 bg-image"
+      class="text-center py-5 bg-image flex-column d-flex align-items-center justify-content-center"
       style="
         background-repeat: no-repeat;
         background-size: cover;
@@ -25,25 +25,33 @@
       "
     >
       <div>
-        <h1 style="color: white">Hack the blog</h1>
+        <h1 style="filter: brightness(100%); color: white">Hack the blog</h1>
       </div>
       <div>
         <p style="color: white">El Blog de Hack Academy</p>
       </div>
     </div>
 
-    <main class="container">
-      <% for(const article in articleList) {%>
-      <h2>
-        <a href="/articulos/<%=articleList[article].id%>"><%= articleList[article].title%></a>
-      </h2>
-      <p>
-        <%="Creado por "+ articleList[article].user.firstname +" "+
-        articleList[article].user.lastname + " el " + format(new
-        Date(String(articleList[article].createdAt)), " dd' de 'MMMM' , 'yyyy", {locale: es}) %>
-      </p>
-
-      <% } %>
+    <main class="container d-flex align-items-center justify-content-center">
+      <div class="mt-5">
+        <% for(const article in articleList) {%>
+        <div class="px-4 py-1">
+          <h2>
+            <a
+              style="color: black; text-decoration: none; font-weight: bold"
+              href="/articulos/<%=articleList[article].id%>"
+              ><%= articleList[article].title%></a
+            >
+          </h2>
+          <p style="color: grey; font-style: italic">
+            <%="Creado por "+ articleList[article].user.firstname +" "+
+            articleList[article].user.lastname + " el " + format(new
+            Date(String(articleList[article].createdAt)), " dd' de 'MMMM' , 'yyyy", {locale: es}) %>
+          </p>
+        </div>
+        <hr />
+        <% } %>
+      </div>
     </main>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
