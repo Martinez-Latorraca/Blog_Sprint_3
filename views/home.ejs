@@ -14,24 +14,12 @@
   </head>
   <body>
     <section><%- include("partials/navbar") %></section>
-    <div
-      class="text-center py-5 bg-image container-fuid"
-      style="
-        background-repeat: no-repeat;
-        height: 260px;
-        background-image: url(https://images.pexels.com/photos/2101704/pexels-photo-2101704.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
-      "
-    >
-      <div>
-        <h1>Hack the blog</h1>
-      </div>
-      <div>
-        <p>El Blog de Hack Academy</p>
-      </div>
-    </div>
+    <%- include("partials/header") %>
     <main class="container">
       <% for(const article in articleList) {%>
-      <h2><a href="/<%=articleList[article].id%>"><%= articleList[article].title%></a></h2>
+      <h2>
+        <a href="/articulos/<%=articleList[article].id%>"><%= articleList[article].title%></a>
+      </h2>
       <p>
         <%="Creado por "+ articleList[article].user.firstname +" "+
         articleList[article].user.lastname + " el " + format(new

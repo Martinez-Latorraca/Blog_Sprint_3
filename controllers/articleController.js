@@ -17,7 +17,6 @@ async function index(req, res) {
 async function show(req, res) {
   const id = req.params.id;
   const comments = await Comment.findAll({ where: { articleId: id }, include: "article" });
-  console.log(comments);
   const singleArticle = await Article.findByPk(id, { include: "user" });
   res.render("article", {
     singleArticle,
@@ -28,8 +27,7 @@ async function show(req, res) {
 
 // Show the form for creating a new resource
 async function create(req, res) {
-
-  res.render("adminCreate")
+  res.render("adminCreate");
 }
 
 // Store a newly created resource in storage.
@@ -42,27 +40,26 @@ async function store(req, res) {
 
   form.parse(req, async (err, fields, files) => {
     const { title, firstname, lastname, content } = fields;
-     await User.create({
+    await User.create({
       firstname,
-      lastname
+      lastname,
     });
     const user = await User.findOne({
-      where : {
-        firstname: `${firstname}`
+      where: {
+        firstname: `${firstname}`,
       },
       where: {
-        lastname: `${lastname}`
-      }
-    })
+        lastname: `${lastname}`,
+      },
+    });
     const userId = user.id;
-    
+
     await Article.create({
       title,
       content,
       image: files["image"].newFilename,
-      userId
+      userId,
     });
-   
   });
   return res.redirect("/articulos");
 }
