@@ -19,13 +19,9 @@
     <section class="container p-5">
       <div>
         <p><%=singleArticle.content %></p>
-        <p>
-          <%= `Creado por ${singleArticle.user.firstname} ${singleArticle.user.lastname} el
-          ${singleArticle.createdAt}`%>
-        </p>
       </div>
-      <form method="post" action="/comentarios">
-        <div class="pb-3">
+      <div class="pb-3">
+        <form method="post" action="/comentarios">
           <div>
             <label for="fullname" class="form-label">Add your comment</label>
             <input
@@ -48,7 +44,7 @@
           <div>
             <input type="hidden" name="id" value="<%=id%>" />
             <button type="submit" class="btn btn-primary">Send</button>
-            <hr>
+            <hr />
           </div>
         </form>
         <div>
@@ -58,8 +54,7 @@
           <p><%= comment.fullname %></p>
           <% } %>
         </div>
-        </div>
-       
+      </div>
     </section>
     <section><%- include("partials/footer")%></section>
     <script
