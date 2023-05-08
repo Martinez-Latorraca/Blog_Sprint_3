@@ -101,7 +101,7 @@ async function destroy(req, res) {
   const { id } = req.params;
   const results = await Article.destroy({ where: { id: id } });
   console.log(`Se borraron: ${results.affectedRows} filas`);
-  res.redirect(200, "/articulos");
+  res.redirect(200, "/admin");
 }
 
 async function showAdmin(req, res) {
