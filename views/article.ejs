@@ -13,6 +13,7 @@
     <title>Home</title>
   </head>
   <body>
+    <%- include("partials/header") %>
     <section class="container">
       <div>
         <h1><%=singleArticle.title %></h1>
@@ -43,19 +44,16 @@
           ></textarea>
         </div>
         <div>
-          <input type="hidden" name="id" value="<%=id%>">
+          <input type="hidden" name="id" value="<%=id%>" />
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
       <div>
         <h2>Comments <%=`(${comments.length})`%></h2>
         <% for(const comment of comments){%>
-          <p><%= comment.content %></p>
-          <p><%= comment.fullname %></p>
-          <% } %>
-         
-
-         
+        <p><%= comment.content %></p>
+        <p><%= comment.fullname %></p>
+        <% } %>
       </div>
     </section>
 

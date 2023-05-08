@@ -23,6 +23,8 @@ async function show(req, res) {
     singleArticle,
     id,
     comments,
+    format,
+    es,
   });
 }
 
@@ -82,11 +84,15 @@ async function update(req, res) {
 
   form.parse(req, async (err, fields, files) => {
     const { title, content } = fields;
-    await Article.create({
-      title: title,
-      content: content,
-      image: files["image"].newFilename,
-    });
+    const { id } = req.params;
+    const result = await Article.update(
+      {
+        title: title,
+        content: content,
+        image: files["image"].newFilename,
+      },
+      { where: { id: id } },
+    );
   });
   return res.redirect("/articulos");
 }
