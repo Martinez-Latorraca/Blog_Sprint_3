@@ -24,15 +24,18 @@
             <h1>Editar artículo</h1>
           </div>
           <div class="mt-3">
-            <label for="title" class="form-label">Title</label>
-            <input
-              value="<%= singleArticle.title %>"
-              name="title"
-              type="text"
-              class="form-control"
-              id="title"
-            />
+            <label for="title" class="form-label">Author</label>
+            <select class="form-select" aria-label="Default select example" name="userId">
+              <option selected value="<%=singleArticle.userId%>"><%=`${singleArticle.user.firstname} ${singleArticle.user.lastname}`%></option>
+              <% for(const user in users) { %>
+              <option value=<%=`${users[user].id}`%>><%=`${users[user].firstname}  ${users[user].lastname}`%></option>
+              <% } %>
+            </select>
           </div>
+            <div class="mt-3">
+              <label for="title" class="form-label">Title</label>
+              <input value="<%= singleArticle.title %>" name="title" type="text" class="form-control" id="title" />
+            </div>
           <div class="mt-3">
             <label for="content" class="form-label">Content</label>
             <textarea style="height: 300px" name="content" class="form-control" id="content">
