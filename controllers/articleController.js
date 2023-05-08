@@ -6,7 +6,7 @@ const formidable = require("formidable");
 // Display a listing of the resource.
 async function index(req, res) {
   const articleList = await Article.findAll({ include: "user" });
-  res.render("home", {
+  return res.render("home", {
     articleList,
     format,
     es,
@@ -18,7 +18,7 @@ async function show(req, res) {
   const id = req.params.id;
   const comments = await Comment.findAll({ where: { articleId: id }, include: "article" });
   const singleArticle = await Article.findByPk(id, { include: "user" });
-  res.render("article", {
+  return res.render("article", {
     singleArticle,
     id,
     comments,
@@ -29,7 +29,7 @@ async function show(req, res) {
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  res.render("adminCreate");
+  return res.render("adminCreate");
 }
 
 // Store a newly created resource in storage.
@@ -110,13 +110,13 @@ async function destroy(req, res) {
   const { id } = req.params;
   const results = await Article.destroy({ where: { id: id } });
   console.log(`Se borraron: ${results.affectedRows} filas`);
-  res.redirect(200, "/admin");
+  return res.redirect(200, "/admin");
 }
 
 async function showAdmin(req, res) {
   const articleList = await Article.findAll({ include: "user" });
 
-  res.render("admin", {
+  return res.render("admin", {
     articleList,
     format,
   });
