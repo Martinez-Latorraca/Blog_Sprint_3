@@ -76,10 +76,7 @@ async function edit(req, res) {
   const singleArticle = await Article.findByPk(id, { include: "user" });
   const users = await User.findAll();
   console.log(singleArticle);
-  res.render("adminEdit", { singleArticle, 
-    id,
-    users
-   });
+  res.render("adminEdit", { singleArticle, id, users });
 }
 
 // Update the specified resource in storage.
@@ -93,19 +90,18 @@ async function update(req, res) {
   form.parse(req, async (err, fields, files) => {
     const { title, content, userId } = fields;
     const { id } = req.params;
-    const image = files["image"].newFilename
+    const image = files["image"].newFilename;
     const result = await Article.update(
       {
         title,
         content,
         image,
-        userId
+        userId,
       },
       { where: { id: id } },
-      );
-    
+    );
   });
-  
+
   return res.redirect("/admin");
 }
 
@@ -126,6 +122,12 @@ async function showAdmin(req, res) {
   });
 }
 
+async function showApi(req, res) {
+  const articleList = await Article.findAll({ include: "user" });
+  console.log(articleList);
+  return res.json(articleList);
+}
+
 // Otros handlers...
 // ...
 
@@ -138,6 +140,7 @@ module.exports = {
   update,
   destroy,
   showAdmin,
+  showApi,
 };
 
 /* 
