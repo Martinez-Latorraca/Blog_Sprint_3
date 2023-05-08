@@ -18,7 +18,6 @@ async function show(req, res) {
   const id = req.params.id;
   const comments = await Comment.findAll({ where: { articleId: id }, include: "article" });
   const singleArticle = await Article.findByPk(id, { include: "user" });
-  console.log(singleArticle.image)
   res.render("article", {
     singleArticle,
     id,
