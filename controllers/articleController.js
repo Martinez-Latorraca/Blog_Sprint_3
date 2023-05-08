@@ -105,10 +105,10 @@ async function destroy(req, res) {
 }
 
 async function showAdmin(req, res) {
-  const adminList = await Article.findAll({ include: "user" });
+  const articleList = await Article.findAll({ include: "user" });
 
   res.render("admin", {
-    adminList,
+    articleList,
     format,
   });
 }

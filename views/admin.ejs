@@ -37,39 +37,39 @@
             </tr>
           </thead>
           <tbody>
-            <% for(let i = 0; i < 10 ; i++) { %>
+            <% for(const article in articleList) { %>
             <tr>
-              <th scope="row"><%= adminList[i].id %></th>
-              <td><%= adminList[i].title %></td>
-              <td><%=adminList[i].content.slice(0,200)+ "..." %></td>
+              <th scope="row"><%= articleList[article].id %></th>
+              <td><%= articleList[article].title %></td>
+              <td><%=articleList[article].content.slice(0,200)+ "..." %></td>
               <td>
                 <img
                   style="max-width: 100px"
                   class="img-fluid"
-                  src="/img/<%= adminList[i].image %>"
+                  src="/img/<%= articleList[article].image %>"
                   alt="Article image"
                 />
               </td>
               <td>
-                <%= format(new Date(String(adminList[i].createdAt)), "yyyy'-'MM'-'dd kk:mm:ss"); %>
+                <%= format(new Date(String(articleList[article].createdAt)), "yyyy'-'MM'-'dd kk:mm:ss"); %>
               </td>
-              <td><%= `${adminList[i].user.firstname} ${adminList[i].user.lastname}` %></td>
+              <td><%= `${articleList[article].user.firstname} ${articleList[article].user.lastname}` %></td>
               <td>
                 <div class="gap-2 d-flex justify-content-center">
                   <div>
                     <a
                       class="btn btn-primary btn-sm"
-                      href="/articulos/<%= adminList[i].id %>/editar"
+                      href="/articulos/<%= articleList[article].id %>/editar"
                       role="button"
                     >
                       Edit
                     </a>
                   </div>
                   <div>
-                    <input type="hidden" name="id" value="adminList[i].id" />
+                    <input type="hidden" name="id" value="articleList[article].id" />
                     <a
                       class="btn btn-danger btn-sm"
-                      href="/articulos/eliminar/<%=adminList[i].id%>"
+                      href="/articulos/eliminar/<%=articleList[article].id%>"
                       role="button"
                     >
                       Delete
