@@ -1,19 +1,20 @@
 <div
-  class="text-center py-5 bg-image"
+  class="text-center justify-content-center py-5 bg-image"
   style="
     background-repeat: no-repeat;
     background-size: cover;
     height: 260px;
-    background-image: url(/public/img/<%=singleArticle.image%>);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/<%= singleArticle.image %>');
   "
 >
   <div>
-    <h1 style="color: white"><%= singleArticle.title %></h1>
+    <h1 style="color: rgb(255, 255, 255)"><%= singleArticle.title %></h1>
   </div>
   <div>
-    <p style="color: white">
+    <p style="color: rgb(255, 255, 255)">
       <%="Creado por "+ singleArticle.user.firstname +" "+ singleArticle.user.lastname + " el " +
       format(new Date(String(singleArticle.createdAt)), " dd' de 'MMMM' , 'yyyy", {locale: es}) %>
     </p>
+    
   </div>
 </div>
