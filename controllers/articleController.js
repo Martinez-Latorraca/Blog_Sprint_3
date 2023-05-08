@@ -70,7 +70,12 @@ async function store(req, res) {
 async function edit(req, res) {
   const id = req.params.id;
   const singleArticle = await Article.findByPk(id, { include: "user" });
-  res.render("adminEdit", { singleArticle, id });
+  const users = await User.findAll();
+  console.log(singleArticle);
+  res.render("adminEdit", { singleArticle, 
+    id,
+    users
+   });
 }
 
 // Update the specified resource in storage.
@@ -82,17 +87,21 @@ async function update(req, res) {
   });
 
   form.parse(req, async (err, fields, files) => {
-    const { title, content } = fields;
+    const { title, content, userId } = fields;
     const { id } = req.params;
+    const image = files["image"].newFilename
     const result = await Article.update(
       {
-        title: title,
-        content: content,
-        image: files["image"].newFilename,
+        title,
+        content,
+        image,
+        userId
       },
       { where: { id: id } },
-    );
+      );
+    
   });
+  
   return res.redirect("/admin");
 }
 
