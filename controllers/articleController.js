@@ -113,15 +113,6 @@ async function destroy(req, res) {
   return res.redirect(200, "/admin");
 }
 
-async function showAdmin(req, res) {
-  const articleList = await Article.findAll({ include: "user" });
-
-  return res.render("admin", {
-    articleList,
-    format,
-  });
-}
-
 async function showApi(req, res) {
   const articleList = await Article.findAll({ include: "user" });
   console.log(articleList);
@@ -139,7 +130,6 @@ module.exports = {
   edit,
   update,
   destroy,
-  showAdmin,
   showApi,
 };
 

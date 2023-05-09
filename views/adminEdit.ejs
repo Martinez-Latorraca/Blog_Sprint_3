@@ -25,12 +25,6 @@
           </div>
           <div class="mt-3">
             <label for="title" class="form-label">Author</label>
-            <select class="form-select" aria-label="Default select example" name="userId">
-              <option selected value="<%=singleArticle.userId%>"><%=`${singleArticle.user.firstname} ${singleArticle.user.lastname}`%></option>
-              <% for(const user in users) { %>
-              <option value=<%=`${users[user].id}`%>><%=`${users[user].firstname}  ${users[user].lastname}`%></option>
-              <% } %>
-            </select>
           </div>
             <div class="mt-3">
               <label for="title" class="form-label">Title</label>
