@@ -5,12 +5,17 @@ const formidable = require("formidable");
 
 // Display a listing of the resource.
 async function index(req, res) {
-  const articleList = await Article.findAll({ include: "user" });
-  return res.render("home", {
-    articleList,
-    format,
-    es,
+  const articleList = await Article.findAll({
+    include: [User, Comment],
+    sort: ["createdAt", "DESC"],
   });
+  articleList &&
+    articleList.forEach((article) => {
+      article.dataValues.createdAt = format(article.dataValues.createdAt, "dd 'de' MMMM','  yyyy", {
+        locale: es,
+      });
+    });
+  return res.render("home", { articleList });
 }
 
 // Display the specified resource.
@@ -132,27 +137,3 @@ module.exports = {
   destroy,
   showApi,
 };
-
-/* 
-const { title, authorFirst, content, image } = req.body;
-  const user = await User.findOne({
-    where: {
-      firstname: authorFirst,
-    },
-  });
-  const userId = user.id;
-  const result = await Article.update(
-    {
-      title,
-      content,
-      image,
-      userId,
-    },
-    {
-      where: {
-        id: req.params.id,
-      },
-    },
-    { include: "user" },
-  );
-  */

@@ -1,7 +1,5 @@
-const { Article, Comment } = require("../models");
+const { Comment } = require("../models");
 
-async function show(req, res) {}
-// Store a newly created resource in storage.
 async function store(req, res) {
   const comments = await Comment.create({
     fullname: req.body.fullname,
@@ -13,6 +11,5 @@ async function store(req, res) {
 }
 
 module.exports = {
-  show,
   store,
 };

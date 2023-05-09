@@ -19,6 +19,7 @@ class User extends Model {
       {
         sequelize,
         modelName: "user",
+        timestamps: false,
       },
     );
     return User;

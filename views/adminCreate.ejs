@@ -14,6 +14,8 @@
   </head>
 
   <body>
+    <%- include("./partials/navbar.ejs") %>
+
     <section class="container">
       <div class="mt-5 shadow p-4 rounded">
         <form method="post" action="/articulos/" enctype="multipart/form-data">
@@ -43,7 +45,6 @@
           <div class="mt-3">
             <label for="image" class="form-label">Image</label>
             <input name="image" class="form-control" type="file" id="image" />
-            <img style="max-width: 150px" class="img-fluid mt-2" src="" alt="Article image" />
           </div>
           <div class="mt-3">
             <button id="btnSubmit" type="submit" class="btn btn-success">Create</button>

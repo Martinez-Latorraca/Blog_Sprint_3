@@ -14,7 +14,7 @@
     <title>Home</title>
   </head>
   <body>
-    <section><%- include("partials/navbar") %></section>
+    <section><%- include("./partials/navbar.ejs") %></section>
 
     <div
       class="text-center py-5 bg-image flex-column d-flex align-items-center justify-content-center"
@@ -47,8 +47,7 @@
           </h2>
           <p style="color: grey; font-style: italic">
             <%="Creado por "+ articleList[article].user.firstname +" "+
-            articleList[article].user.lastname + " el " + format(new
-            Date(String(articleList[article].createdAt)), " dd' de 'MMMM' , 'yyyy", {locale: es}) %>
+            articleList[article].user.lastname + " el " + articleList[article].createdAt %>
           </p>
         </div>
         <hr />

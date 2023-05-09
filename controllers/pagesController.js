@@ -17,25 +17,19 @@
  */
 
 const { Article } = require("../models");
+const { format } = require("date-fns");
+const { es } = require("date-fns/locale");
 
 async function showHome(req, res) {
-  const articles = await Article.findAll();
-  res.render("home", { articles });
+  const articles = await Article.findAll({ include: "user" });
+  articles.forEach((article) => {
+    article.dataValues.createdAt = format(article.dataValues.createdAt, "yyyy'-'MM'-'dd hh:mm:ss", {
+      locale: es,
+    });
+  });
+  return res.render("home", { articles });
 }
-
-async function showContact(req, res) {
-  res.render("contact");
-}
-
-async function showAboutUs(req, res) {
-  res.render("aboutUs");
-}
-
-// Otros handlers...
-// ...
 
 module.exports = {
   showHome,
-  showContact,
-  showAboutUs,
 };

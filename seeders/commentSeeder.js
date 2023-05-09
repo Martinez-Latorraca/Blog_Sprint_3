@@ -9,7 +9,8 @@ module.exports = async () => {
   for (let i = 0; i < 10; i++) {
     comments.push({
       fullname: faker.name.firstName(),
-      content: faker.lorem.sentence(), 
+      content: faker.lorem.sentence(),
+      articleId: faker.datatype.number({ min: 1, max: 10 }),
     });
   }
 
