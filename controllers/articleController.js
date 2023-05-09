@@ -109,8 +109,8 @@ async function update(req, res) {
 async function destroy(req, res) {
   const { id } = req.params;
   const results = await Article.destroy({ where: { id: id } });
-  console.log(`Se borraron: ${results.affectedRows} filas`);
-  return res.redirect(200, "/admin");
+  console.log(`Se borró la fila con el id: ${id} correctamente`);
+  return res.redirect("/admin");
 }
 
 async function showApi(req, res) {
