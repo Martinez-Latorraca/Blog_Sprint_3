@@ -30,6 +30,21 @@ async function showHome(req, res) {
   return res.render("home", { articles });
 }
 
+async function showRegister(req, res) {
+  return res.render("register");
+}
+async function showLogin(req, res) {
+  return res.render("login");
+}
+
 module.exports = {
   showHome,
+  showRegister,
+  showLogin,
 };
+
+/*router.get("/registro", pageController.showRegister);
+router.post("/registro", pageController.registerUser);
+router.get("/login", pageController.showLogin);
+router.post("/login", pageController.loginUser);
+router.get("/logout", pageController.logoutUser);*/
