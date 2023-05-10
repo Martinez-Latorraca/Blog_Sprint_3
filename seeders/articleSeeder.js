@@ -27,7 +27,7 @@ module.exports = async () => {
     articles.push({
       title: faker.lorem.sentence(5),
       content: faker.lorem.paragraphs(),
-      image: "image-dummy.png",
+      image: "pexels-content-pixie-2736542.jpg",
       userId: faker.datatype.number({ min: 1, max: 10 }),
     });
   }
