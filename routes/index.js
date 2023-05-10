@@ -3,9 +3,9 @@
  * Una alternativa podría ser organizar las rutas por entidad:
  */
 
-const userRoutes = require("./userRoutes");
-const articleRoutes = require("./articleRoutes");
-const commentRoutes = require("./commentRoutes");
+// const userRoutes = require("./userRoutes");
+// const articleRoutes = require("./articleRoutes");
+// const commentRoutes = require("./commentRoutes");
 
 /**
  * Otra alternativa podría ser organizar las rutas según su nivel de
@@ -19,6 +19,7 @@ const commentRoutes = require("./commentRoutes");
 
 const publicRoutes = require("./publicRoutes");
 const privateRoutes = require("./privateRoutes");
+const makeUserAvailableInViews = require("../middlewares/makeUserAvailableInViews");
 
 module.exports = (app) => {
   /**
@@ -27,11 +28,14 @@ module.exports = (app) => {
    * nombres de variables, funciones, etc, que siempre se recomienda que estén
    * en inglés.
    */
+  // app.use("/", (req, res) => {
+  //   res.redirect("/articulos");
+  // });
+  // app.use("/usuarios", userRoutes);
+  // app.use("/articulos", articleRoutes);
+  // app.use("/comentarios", commentRoutes);
 
-  app.use("/usuarios", userRoutes);
-  app.use("/articulos", articleRoutes);
-  app.use("/comentarios", commentRoutes);
-
+  app.use(makeUserAvailableInViews);
   app.use("/", publicRoutes);
-  app.use("/", privateRoutes);
+  app.use("/admin", privateRoutes);
 };

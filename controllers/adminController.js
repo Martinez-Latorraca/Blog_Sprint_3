@@ -1,24 +1,19 @@
 const { Article, Comment, User } = require("../models");
 const { format } = require("date-fns");
 const { es } = require("date-fns/locale");
-const formidable = require("formidable");
 
 async function show(req, res) {
-  const articleList = await Article.findAll({
+  const articles = await Article.findAll({
     include: [User, Comment],
     sort: ["createdAt", "DESC"],
   });
-  articleList &&
-    articleList.forEach((article) => {
-      article.dataValues.createdAt = format(
-        article.dataValues.createdAt,
-        "yyyy'-'MM'-'dd hh:mm:ss",
-        {
-          locale: es,
-        },
-      );
+  articles &&
+    articles.forEach((article) => {
+      article.createdAt = format(article.createdAt, "yyyy'-'MM'-'dd hh:mm:ss", {
+        locale: es,
+      });
     });
-  return res.render("admin", { articleList });
+  return res.render("admin", { articles, format, es });
 }
 
 module.exports = {

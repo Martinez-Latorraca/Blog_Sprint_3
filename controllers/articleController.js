@@ -5,35 +5,19 @@ const formidable = require("formidable");
 
 // Display a listing of the resource.
 async function index(req, res) {
-  const articleList = await Article.findAll({
+  const articles = await Article.findAll({
     include: [User, Comment],
     sort: ["createdAt", "DESC"],
   });
-  articleList &&
-    articleList.forEach((article) => {
-      article.dataValues.createdAt = format(article.dataValues.createdAt, "dd 'de' MMMM','  yyyy", {
-        locale: es,
-      });
-    });
-  return res.render("home", { articleList });
+
+  return res.render("home", { articles, format, es });
 }
 
 // Display the specified resource.
 async function show(req, res) {
-  const id = req.params.id;
-  const comments = await Comment.findAll({
-    where: { articleId: id },
-    include: "article",
-    order: [["createdAt", "DESC"]],
-  });
-  const singleArticle = await Article.findByPk(id, { include: "user" });
-  return res.render("article", {
-    singleArticle,
-    id,
-    comments,
-    format,
-    es,
-  });
+  const article = await Article.findByPk(req.params.id, { include: [User, Comment] });
+
+  return article ? res.render("article", { article, format, es }) : res.redirect("/");
 }
 
 // Show the form for creating a new resource
@@ -78,10 +62,10 @@ async function store(req, res) {
 // Show the form for editing the specified resource.
 async function edit(req, res) {
   const id = req.params.id;
-  const singleArticle = await Article.findByPk(id, { include: "user" });
+  const article = await Article.findByPk(id, { include: "user" });
   const users = await User.findAll();
-  console.log(singleArticle);
-  res.render("adminEdit", { singleArticle, id, users });
+  console.log(article);
+  res.render("adminEdit", { article, id, users });
 }
 
 // Update the specified resource in storage.
@@ -119,9 +103,9 @@ async function destroy(req, res) {
 }
 
 async function showApi(req, res) {
-  const articleList = await Article.findAll({ include: "user" });
-  console.log(articleList);
-  return res.json(articleList);
+  const articles = await Article.findAll({ include: "user" });
+  console.log(articles);
+  return res.json(articles);
 }
 
 // Otros handlers...

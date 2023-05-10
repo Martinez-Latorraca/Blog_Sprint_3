@@ -1,21 +1,19 @@
 <div
-  class="text-center d-flex justify-content-center align-intems-center flex-column py-5 bg-image"
+  class="d-flex justify-content-center align-intems-center flex-column py-5 bg-image"
   style="
     background-repeat: no-repeat;
     background-size: cover;
     height: 260px;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url('/img/<%= singleArticle.image %>');
+      url('/img/<%= article.image %>');
   "
 >
-  <div class="container">
+  <div class="d-flex justify-content-center align-items-center">
     <div>
-      <h1 style="color: rgb(255, 255, 255)"><%= singleArticle.title %></h1>
-    </div>
-    <div>
-      <p style="color: rgb(255, 255, 255)">
-        <%="Creado por "+ singleArticle.user.firstname +" "+ singleArticle.user.lastname + " el " +
-        format(new Date(String(singleArticle.createdAt)), " dd' de 'MMMM' , 'yyyy", {locale: es}) %>
+      <h1 style="color: rgb(255, 255, 255)"><%= article.title %></h1>
+
+      <p style="color: white; font-style: italic">
+        Creado por <%= article.user.fullname%> el <%= format(article.createdAt, "dd 'de' MMMM' del 'yyyy", { locale: es }) %>
       </p>
     </div>
   </div>

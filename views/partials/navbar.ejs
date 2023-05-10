@@ -1,6 +1,9 @@
 <nav class="navbar bg-dark">
   <div class="container">
-    <a class="navbar-brand mb-0 h1 text-white" href="/articulos">Hack the blog</a>
-    <a class="btn btn-primary" href="/admin">Admin</a>
+    <a class="navbar-brand mb-0 h1 text-white" href="/">Hack the blog</a>
+    <% if(user){ %> <a class="btn btn-primary" href="/admin">Admin</a>
+    <% } else{ %>
+    <a class="btn btn-primary" href="/login">Login</a>
+    <% } %>
   </div>
 </nav>

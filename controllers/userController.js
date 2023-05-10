@@ -11,9 +11,10 @@ async function show(req, res) {}
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  const user = await User.create({
-    firstname: "Braulio",
-    lastname: "González",
+  await User.create({
+    fullname: req.body.fullname,
+    userEmail: req.body.email,
+    userPass: await bcrypt.hash(process.env.SESSION_CREDENTIAL, 10),
   });
   res.redirect("/articulos");
 }

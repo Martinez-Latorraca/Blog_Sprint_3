@@ -19,7 +19,7 @@
       <div class="mt-5 shadow p-4 rounded">
         <form
           method="post"
-          action="/articulos/<%= singleArticle.id %>/editar"
+          action="/articulos/<%= article.id %>/editar"
           enctype="multipart/form-data"
         >
           <div>
@@ -31,7 +31,7 @@
           <div class="mt-3">
             <label for="title" class="form-label">Title</label>
             <input
-              value="<%= singleArticle.title %>"
+              value="<%= article.title %>"
               name="title"
               type="text"
               class="form-control"
@@ -41,7 +41,7 @@
           <div class="mt-3">
             <label for="content" class="form-label">Content</label>
             <textarea style="height: 300px" name="content" class="form-control" id="content">
-            <%= singleArticle.content %>
+            <%= article.content %>
             </textarea>
           </div>
           <div class="mt-3">
@@ -50,7 +50,7 @@
             <img
               style="max-width: 150px"
               class="img-fluid mt-2"
-              src="/img/<%= singleArticle.image %>"
+              src="/img/<%= article.image %>"
               alt="Article image"
             />
           </div>

@@ -1,11 +1,20 @@
 const express = require("express");
 const router = express.Router();
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+
 const adminController = require("../controllers/adminController");
 const articleController = require("../controllers/articleController");
+const commentController = require("../controllers/commentController");
 
 // Rutas relacionadas al panel de control (Admin):
 // ...
-router.get("/admin", adminController.show);
-router.get("/api/articulos", articleController.showApi);
+router.get("/", ensureAuthenticated, adminController.show);
+router.get("/api/articulos", ensureAuthenticated, articleController.showApi);
+router.get("/crear", ensureAuthenticated, articleController.create);
+router.post("/", ensureAuthenticated, articleController.store);
+router.get("/:id/editar", ensureAuthenticated, articleController.edit);
+router.post("/:id/editar", ensureAuthenticated, articleController.update);
+router.get("/eliminar/:id", ensureAuthenticated, articleController.destroy);
+router.post("/comment/:id", ensureAuthenticated, commentController.store);
 
 module.exports = router;

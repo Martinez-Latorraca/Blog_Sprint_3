@@ -30,8 +30,9 @@ async function showHome(req, res) {
   return res.render("home", { articles });
 }
 
-async function showRegister(req, res) {
-  return res.render("register");
+async function showSignUp(req, res) {
+  const message = "";
+  return res.render("register", { message });
 }
 async function showLogin(req, res) {
   return res.render("login");
@@ -39,7 +40,7 @@ async function showLogin(req, res) {
 
 module.exports = {
   showHome,
-  showRegister,
+  showSignUp,
   showLogin,
 };
 
