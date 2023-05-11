@@ -32,7 +32,7 @@ async function showHome(req, res) {
 
 async function showSignUp(req, res) {
   const message = "";
-  return res.render("signup", { message });
+  return res.render("register", { message });
 }
 async function showLogin(req, res) {
   return res.render("login");
