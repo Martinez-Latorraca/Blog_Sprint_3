@@ -10,7 +10,7 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
-    <title>Editar artículo</title>
+    <title>Create article</title>
   </head>
 
   <body>
@@ -20,18 +20,11 @@
       <div class="mt-5 shadow p-4 rounded">
         <form method="post" action="/articulos/" enctype="multipart/form-data">
           <div>
-            <h1>Crear artículo</h1>
+            <h1>Create article</h1>
           </div>
           <div class="mt-3">
             <label for="title" class="form-label">Title</label>
-            <input value="" name="title" type="text" class="form-control" id="title" />
-          </div>
-          <div class="mt-3">
-            <legend>Author</legend>
-            <label for="title" class="form-label">Firstname</label>
-            <input value="" name="firstname" type="text" class="form-control" id="firstname" />
-            <label for="title" class="form-label">Lastname</label>
-            <input value="" name="lastname" type="text" class="form-control" id="lastname" />
+            <input value="" name="title" type="text" class="form-control" id="title" require />
           </div>
           <div class="mt-3">
             <label for="content" class="form-label">Content</label>
@@ -40,6 +33,7 @@
               name="content"
               class="form-control"
               id="content"
+              require
             ></textarea>
           </div>
           <div class="mt-3">
@@ -52,7 +46,7 @@
         </form>
       </div>
       <div class="mt-3 mb-5">
-        <a href="/admin">Volver</a>
+        <a href="/admin">Previous page</a>
       </div>
     </section>
     <script

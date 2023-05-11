@@ -1,6 +1,6 @@
 const { Article, Comment, User } = require("../models");
 const { format } = require("date-fns");
-const { es } = require("date-fns/locale");
+const { en } = require("date-fns/locale");
 const formidable = require("formidable");
 
 // Display a listing of the resource.
@@ -10,7 +10,7 @@ async function index(req, res) {
     sort: ["createdAt", "DESC"],
   });
 
-  return res.render("home", { articles, format, es });
+  return res.render("home", { articles, format, en });
 }
 
 async function show(req, res) {
@@ -24,7 +24,7 @@ async function show(req, res) {
     ],
   });
   console.log(article);
-  return article ? res.render("article", { article, format, es }) : res.redirect("/");
+  return article ? res.render("article", { article, format, en }) : res.redirect("/");
 }
 /*async function show(req, res) {
   const article = await Article.findByPk(
@@ -87,8 +87,11 @@ async function store(req, res) {
 async function edit(req, res) {
   const id = req.params.id;
   const article = await Article.findByPk(id, { include: "user" });
-  const users = await User.findAll();
-  res.render("adminEdit", { article, id, users });
+  if (req.user.id === article.user.id) {
+    return res.render("adminEdit", { article, id });
+  } else {
+    return res.render("forbidden", { message: "No tienes permiso para editar este artículo" });
+  }
 }
 
 // Update the specified resource in storage.

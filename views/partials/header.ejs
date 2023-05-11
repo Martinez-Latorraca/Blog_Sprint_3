@@ -13,7 +13,7 @@
       <h1 style="color: rgb(255, 255, 255)"><%= article.title %></h1>
 
       <p style="color: white; font-style: italic">
-        Creado por <%= article.user.fullname%> el <%= format(article.createdAt, "dd 'de' MMMM' del 'yyyy", { locale: es }) %>
+        Created by <%= article.user.fullname%> on <%= format(article.createdAt, "MMMM do' ,' yyyy", { locale: en }) %>.
       </p>
     </div>
   </div>

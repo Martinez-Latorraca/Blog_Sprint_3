@@ -30,7 +30,7 @@
         <h1 style="filter: brightness(100%); color: white">Hack the blog</h1>
       </div>
       <div>
-        <p style="color: white">El Blog de Hack Academy</p>
+        <p style="color: white">Hack Academy's Blog</p>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
             >
           </h2>
           <p style="color: grey; font-style: italic">
-            Creado por <%= article.user.fullname%> el <%= format(article.createdAt, "dd 'de' MMMM' del ' yyyy", { locale: es }) %>
+            Created by <%= article.user.fullname%> on <%= format(article.createdAt, "MMMM do' ,' yyyy", { locale: en }) %>.
           </p>
         </div>
         <hr />
