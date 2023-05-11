@@ -33,6 +33,9 @@
         </div>
         <div class="d-flex justify-content-between pt-3">
           <button type="submit" class="btn btn-primary">Log In</button>
+          <% if(messages) {%>
+          <p class="text-danger"><%= messages.info %></p>
+          <% } %>
           <a href="/users/registro" class="btn btn-success">Registrarse</a>
         </div>
       </form>

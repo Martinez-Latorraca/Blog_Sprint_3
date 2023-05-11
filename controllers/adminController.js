@@ -4,6 +4,7 @@ const { es } = require("date-fns/locale");
 
 async function show(req, res) {
   const articles = await Article.findAll({
+    where: { userId: req.user.id },
     include: [User, Comment],
     sort: ["createdAt", "DESC"],
   });

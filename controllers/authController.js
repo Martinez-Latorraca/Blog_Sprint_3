@@ -3,26 +3,50 @@ const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 
 function login(req, res) {
-  passport.authenticate("local", { failureRedirect: "/", successRedirect: "/admin" })(req, res);
+  passport.authenticate(
+    "local",
+    { failureRedirect: "/login", successRedirect: "/admin" },
+    // (err, user, info, status) => {
+    //   if (!user) {
+    //     req.flash("info", "Usuario y/o contraseña incorrecta. ");
+    //     return res.redirect("/login");
+    //   } else {
+    //     return res.redirect("/admin");
+    //   }
+    // }
+  )(req, res);
 }
 
 async function signUp(req, res) {
-  const [user, created] = await User.findOrCreate({
+  const user = await User.findOne({
     where: {
+      email: req.body.email,
+    },
+  });
+
+  if (user) {
+    req.flash("info", "Ese usuario ya ha sido registrado");
+    return res.redirect("/users/registro");
+  } else {
+    const newUser = await User.create({
       email: req.body.email,
       fullname: req.body.fullname,
       password: bcrypt.hashSync(req.body.password, 10),
-    },
-  });
-  
-  if (false) {
-    passport.authenticate("local", {
-      successRedirect: "/admin",
-    })(req, res);
-  } else {
-    req.flash("info", "Ese usuaruio ya ha sido registrado");
-    res.redirect("/users/registro");
+    });
+
+    req.login(newUser, () => {
+      return res.redirect("/admin");
+    });
   }
 }
 
-module.exports = { login, signUp };
+async function logOut(req, res) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    return res.redirect("/");
+  });
+}
+
+module.exports = { login, signUp, logOut };

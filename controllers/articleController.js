@@ -64,7 +64,6 @@ async function edit(req, res) {
   const id = req.params.id;
   const article = await Article.findByPk(id, { include: "user" });
   const users = await User.findAll();
-  console.log(article);
   res.render("adminEdit", { article, id, users });
 }
 
@@ -77,18 +76,18 @@ async function update(req, res) {
   });
 
   form.parse(req, async (err, fields, files) => {
-    const { title, content, userId } = fields;
-    const { id } = req.params;
-    const image = files["image"].newFilename;
-    const result = await Article.update(
-      {
-        title,
-        content,
-        image,
-        userId,
-      },
-      { where: { id: id } },
-    );
+    // si cambia la imagen, modificala en la bd si no dejar la imagen original
+    const data = {
+      title: fields.title,
+      content: fields.content,
+    };
+
+    if (files.image.size > 0) {
+      console.log(files.image.newFilename);
+      data.image = files.image.newFilename;
+    }
+
+    await Article.update(data, { where: { id: req.params.id } });
   });
 
   return res.redirect("/admin");
@@ -97,14 +96,14 @@ async function update(req, res) {
 // Remove the specified resource from storage.
 async function destroy(req, res) {
   const { id } = req.params;
-  const results = await Article.destroy({ where: { id: id } });
+  const results = await Article.destroy({ where: { id: req.params.id } });
   console.log(`Se borró la fila con el id: ${id} correctamente`);
   return res.redirect("/admin");
 }
 
 async function showApi(req, res) {
   const articles = await Article.findAll({ include: "user" });
-  console.log(articles);
+
   return res.json(articles);
 }
 

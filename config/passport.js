@@ -4,11 +4,12 @@ const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 
 function passportConfig() {
+  let checkPass;
   passport.use(
     new LocalStrategy({ usernameField: "email" }, async function (email, password, done) {
       try {
         const user = await User.findOne({ where: { email: email } });
-        const checkPass = await bcrypt.compare(password, user.password);
+        user ? (checkPass = await bcrypt.compare(password, user.password)) : null;
         if (!user || !checkPass) {
           return done(null, false, { message: "Credenciales incorrectas" });
         }
