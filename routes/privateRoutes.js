@@ -5,8 +5,6 @@ const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
 const adminController = require("../controllers/adminController");
 const articleController = require("../controllers/articleController");
 
-// Rutas relacionadas al panel de control (Admin):
-// ...
 router.get("/", ensureAuthenticated, adminController.show);
 router.get("/api/articulos", ensureAuthenticated, articleController.showApi);
 router.get("/crear", ensureAuthenticated, articleController.create);

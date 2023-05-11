@@ -43,9 +43,3 @@ module.exports = {
   showSignUp,
   showLogin,
 };
-
-/*router.get("/registro", pageController.showRegister);
-router.post("/registro", pageController.registerUser);
-router.get("/login", pageController.showLogin);
-router.post("/login", pageController.loginUser);
-router.get("/logout", pageController.logoutUser);*/

@@ -23,26 +23,9 @@ async function show(req, res) {
       },
     ],
   });
-  console.log(article);
+
   return article ? res.render("article", { article, format, en }) : res.redirect("/");
 }
-/*async function show(req, res) {
-  const article = await Article.findByPk(
-    req.params.id,
-    { include: [User, Comment] },
-    //{ include: [User, Comment] },
-    {
-      model: Comment,
-      include: {
-        model: User,
-        attributes: ["fullname"],
-      },
-    },
-  );
-  console.log(article);
-  return res.json({ article });
-  //return article ? res.render("article", { article, format, es }) : res.redirect("/");
-}*/
 
 // Show the form for creating a new resource
 async function create(req, res) {
@@ -118,9 +101,6 @@ async function showApi(req, res) {
 
   return res.json(articles);
 }
-
-// Otros handlers...
-// ...
 
 module.exports = {
   index,

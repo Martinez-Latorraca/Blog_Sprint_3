@@ -3,18 +3,10 @@ const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 
 function login(req, res) {
-  passport.authenticate(
-    "local",
-    { failureRedirect: "/login", successRedirect: "/admin" },
-    // (err, user, info, status) => {
-    //   if (!user) {
-    //     req.flash("info", "Usuario y/o contraseña incorrecta. ");
-    //     return res.redirect("/login");
-    //   } else {
-    //     return res.redirect("/admin");
-    //   }
-    // }
-  )(req, res);
+  passport.authenticate("local", { failureRedirect: "/login", successRedirect: "/admin" })(
+    req,
+    res,
+  );
 }
 
 async function signUp(req, res) {

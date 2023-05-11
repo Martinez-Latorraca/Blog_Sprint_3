@@ -20,6 +20,11 @@
       <div>
         <p><%=article.content %></p>
       </div>
+      <% if (article.userId === user.id){ %>
+      <div class="container">
+        <a href="/admin/<%= article.id%>/editar" class="btn btn-info">Edit</a>
+      </div>
+      <% } %>
       <hr class="my-5" />
       <div>
         <% if(user){%>
