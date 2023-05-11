@@ -13,12 +13,36 @@ async function index(req, res) {
   return res.render("home", { articles, format, es });
 }
 
-// Display the specified resource.
 async function show(req, res) {
-  const article = await Article.findByPk(req.params.id, { include: [User, Comment] });
-
+  const article = await Article.findByPk(req.params.id, {
+    include: [
+      { model: User },
+      {
+        model: Comment,
+        include: { model: User, attributes: ["fullname"] },
+      },
+    ],
+  });
+  console.log(article);
   return article ? res.render("article", { article, format, es }) : res.redirect("/");
 }
+/*async function show(req, res) {
+  const article = await Article.findByPk(
+    req.params.id,
+    { include: [User, Comment] },
+    //{ include: [User, Comment] },
+    {
+      model: Comment,
+      include: {
+        model: User,
+        attributes: ["fullname"],
+      },
+    },
+  );
+  console.log(article);
+  return res.json({ article });
+  //return article ? res.render("article", { article, format, es }) : res.redirect("/");
+}*/
 
 // Show the form for creating a new resource
 async function create(req, res) {

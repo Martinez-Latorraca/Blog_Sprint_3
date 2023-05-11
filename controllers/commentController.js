@@ -1,13 +1,14 @@
 const { Comment } = require("../models");
 
 async function store(req, res) {
-  const comments = await Comment.create({
+  await Comment.create({
     fullname: req.body.fullname,
     content: req.body.content,
-    articleId: req.body.id,
+    userId: req.user.id,
+    articleId: req.params.id,
   });
 
-  res.redirect(`/articulos/${comments.articleId}`);
+  res.redirect(`/articulos/${req.params.id}`);
 }
 
 module.exports = {

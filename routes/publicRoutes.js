@@ -3,6 +3,7 @@ const router = express.Router();
 const pageController = require("../controllers/pagesController");
 const authController = require("../controllers/authController");
 const articleController = require("../controllers/articleController");
+const commentController = require("../controllers/commentController");
 
 // Rutas relacionadas a la parte pública del sitio web:
 // ...
@@ -13,5 +14,6 @@ router.post("/login", authController.login);
 router.get("/users/registro", pageController.showSignUp);
 router.post("/users/registro", authController.signUp);
 router.get("/logout", authController.logOut);
+router.post("/articulos/:id", commentController.store);
 
 module.exports = router;
