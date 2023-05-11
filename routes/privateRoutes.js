@@ -10,7 +10,7 @@ const articleController = require("../controllers/articleController");
 router.get("/", ensureAuthenticated, adminController.show);
 router.get("/api/articulos", ensureAuthenticated, articleController.showApi);
 router.get("/crear", ensureAuthenticated, articleController.create);
-router.post("/", ensureAuthenticated, articleController.store);
+router.post("/crear", ensureAuthenticated, articleController.store);
 router.get("/:id/editar", ensureAuthenticated, articleController.edit);
 router.post("/:id/editar", ensureAuthenticated, articleController.update);
 router.get("/eliminar/:id", ensureAuthenticated, articleController.destroy);

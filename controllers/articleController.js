@@ -58,29 +58,14 @@ async function store(req, res) {
   });
 
   form.parse(req, async (err, fields, files) => {
-    const { title, firstname, lastname, content } = fields;
-    await User.create({
-      firstname,
-      lastname,
-    });
-    const user = await User.findOne({
-      where: {
-        firstname: `${firstname}`,
-      },
-      where: {
-        lastname: `${lastname}`,
-      },
-    });
-    const userId = user.id;
-
     await Article.create({
-      title,
-      content,
-      image: files["image"].newFilename,
-      userId,
+      title: fields.title,
+      content: fields.content,
+      image: files.image.newFilename,
+      userId: req.user.id,
     });
   });
-  return res.redirect("/articulos");
+  return res.redirect("/admin");
 }
 
 // Show the form for editing the specified resource.
