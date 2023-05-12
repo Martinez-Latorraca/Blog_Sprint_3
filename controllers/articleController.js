@@ -2,6 +2,7 @@ const { Article, Comment, User } = require("../models");
 const { format } = require("date-fns");
 const { en } = require("date-fns/locale");
 const formidable = require("formidable");
+const google = process.env.GA_MEASUREMENT_ID;
 
 // Display a listing of the resource.
 async function index(req, res) {
@@ -10,7 +11,7 @@ async function index(req, res) {
     sort: ["createdAt", "DESC"],
   });
 
-  return res.render("home", { articles, format, en });
+  return res.render("home", { articles, format, en, google });
 }
 
 async function show(req, res) {
@@ -24,12 +25,12 @@ async function show(req, res) {
     ],
   });
 
-  return article ? res.render("article", { article, format, en }) : res.redirect("/");
+  return article ? res.render("article", { article, format, en, google }) : res.redirect("/");
 }
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  return res.render("adminCreate");
+  return res.render("adminCreate", {google});
 }
 
 // Store a newly created resource in storage.
@@ -56,9 +57,9 @@ async function edit(req, res) {
   const id = req.params.id;
   const article = await Article.findByPk(id, { include: "user" });
   if (req.user.id === article.user.id) {
-    return res.render("adminEdit", { article, id });
+    return res.render("adminEdit", { article, id , google});
   } else {
-    return res.render("forbidden", { message: "No tienes permiso para editar este artículo" });
+    return res.render("forbidden", { message: "No tienes permiso para editar este artículo" , google: google});
   }
 }
 

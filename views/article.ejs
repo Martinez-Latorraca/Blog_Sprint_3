@@ -12,6 +12,8 @@
       crossorigin="anonymous"
     />
     <title>Home</title>
+    <%- include("./partials/google.ejs")  %>
+
   </head>
   <body>
     <section><%- include("partials/navbar")%></section>
@@ -20,11 +22,11 @@
       <div>
         <p><%=article.content %></p>
       </div>
-      <% if (user){ %> <% if (article.userId === user.id){ %>
+      <% if (user && article.userId === user.id){ %>
       <div class="container">
         <a href="/admin/<%= article.id%>/editar" class="btn btn-info">Edit</a>
       </div>
-      <% } %> <% } %>
+      <% } %>
       <hr class="my-5" />
       <div>
         <% if(user){%>

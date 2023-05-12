@@ -1,12 +1,14 @@
 const { passport } = require("../config/passport");
+const { sendEmail } = require("../middlewares/sendEmail");
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 
 function login(req, res) {
-  passport.authenticate("local", { failureRedirect: "/login", successRedirect: "/admin" })(
-    req,
-    res,
-  );
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    successRedirect: "/admin",
+    failureFlash: req.flash("info", "Incorrect credentials, try again. "),
+  })(req, res);
 }
 
 async function signUp(req, res) {

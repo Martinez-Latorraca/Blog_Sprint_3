@@ -19,6 +19,7 @@
 const { Article } = require("../models");
 const { format } = require("date-fns");
 const { es } = require("date-fns/locale");
+const google = process.env.GA_MEASUREMENT_ID;
 
 async function showHome(req, res) {
   const articles = await Article.findAll({ include: "user" });
@@ -27,15 +28,14 @@ async function showHome(req, res) {
       locale: es,
     });
   });
-  return res.render("home", { articles });
+  return res.render("home", { articles, google });
 }
 
 async function showSignUp(req, res) {
-  const message = "";
-  return res.render("signup", { message });
+  return req.user ? res.redirect("/") : res.render("signup", { google });
 }
 async function showLogin(req, res) {
-  return res.render("login");
+  return req.user ? res.redirect("/") : res.render("login", { google });
 }
 
 module.exports = {
