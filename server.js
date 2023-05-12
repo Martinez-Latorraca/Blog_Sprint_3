@@ -4,9 +4,9 @@ const methodOverride = require("method-override");
 const express = require("express");
 const routes = require("./routes");
 const session = require("express-session");
-const { passportConfig, passport } = require("./config/passport");
 const flash = require("express-flash");
-const { facebookConfig } = require("./config/facebook");
+
+const passport = require("./config/passportConfig");
 
 const app = express();
 
@@ -14,13 +14,11 @@ app.use(methodOverride("_method"));
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
-app.use(passport.session());
 app.use(flash());
 
-passportConfig();
-facebookConfig();
-
 app.set("view engine", "ejs");
+
+passport(app);
 
 routes(app);
 

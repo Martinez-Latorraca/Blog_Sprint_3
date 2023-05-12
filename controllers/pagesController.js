@@ -19,7 +19,7 @@
 const { Article } = require("../models");
 const { format } = require("date-fns");
 const { es } = require("date-fns/locale");
-const { passport } = require("../config/passport");
+const passport = require("passport");
 
 const google = process.env.GA_MEASUREMENT_ID;
 
@@ -55,7 +55,7 @@ async function facebookRedirect(req, res) {
   passport.authenticate("facebook", { failureRedirect: "/login" }),
     (function (req, res) {
       // Aquí puedes redirigir al usuario a la página de inicio de sesión exitosa
-      console.log(req.user);
+      console.log(req.user, "user");
       res.redirect("/");
     })(req, res);
 }

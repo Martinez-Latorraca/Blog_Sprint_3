@@ -1,8 +1,7 @@
-const passport = require("passport");
 const FacebookStrategy = require("passport-facebook").Strategy;
 const { User } = require("../models");
 
-const facebookConfig = () => {
+module.exports = function (passport) {
   passport.use(
     new FacebookStrategy(
       {
@@ -14,30 +13,18 @@ const facebookConfig = () => {
       async function (accessToken, refreshToken, profile, done) {
         console.log(profile, accessToken, refreshToken);
         try {
-          const user = await User.findOne({ where: { email: profile.email } });
-          user ? (checkPass = await bcrypt.compare(password, user.password)) : null;
-          if (!user || !checkPass) {
-            return done(null, false, { message: "Credenciales incorrectas" });
+          const user = await User.findOne({ where: { email: profile.emails[0].value } });
+          if (user) {
+            console.log("logueo correcto");
+            done(null, user);
+          } else {
+            done(null, false, { message: "credenciales incorrectas" });
           }
-          return done(null, user);
         } catch (error) {
           console.log(error);
+          done(error);
         }
       },
     ),
   );
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
-
-  passport.deserializeUser(async (id, done) => {
-    try {
-      const user = await User.findByPk(id);
-      done(null, user);
-    } catch (error) {
-      done(error);
-    }
-  });
 };
-
-module.exports = { facebookConfig };

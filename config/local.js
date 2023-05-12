@@ -1,10 +1,9 @@
-const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const FacebookStrategy = require("passport-facebook");
+
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 
-function passportConfig() {
+module.exports = function (passport) {
   let checkPass;
   passport.use(
     new LocalStrategy({ usernameField: "email" }, async function (email, password, done) {
@@ -20,19 +19,4 @@ function passportConfig() {
       }
     }),
   );
-
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
-
-  passport.deserializeUser(async (id, done) => {
-    try {
-      const user = await User.findByPk(id);
-      done(null, user);
-    } catch (error) {
-      done(error);
-    }
-  });
-}
-
-module.exports = { passportConfig, passport };
+};
