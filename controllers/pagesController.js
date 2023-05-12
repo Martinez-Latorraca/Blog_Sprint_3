@@ -19,6 +19,8 @@
 const { Article } = require("../models");
 const { format } = require("date-fns");
 const { es } = require("date-fns/locale");
+const { passport } = require("../config/passport");
+
 const google = process.env.GA_MEASUREMENT_ID;
 
 async function showHome(req, res) {
@@ -37,9 +39,31 @@ async function showSignUp(req, res) {
 async function showLogin(req, res) {
   return req.user ? res.redirect("/") : res.render("login", { google });
 }
+async function facebookLogin(req, res, next) {
+  console.log("logearme con facebook");
+  passport.authenticate("facebook", function (err, user, info, status) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.redirect("/signin");
+    }
+    res.redirect("/account");
+  })(req, res, next);
+}
+async function facebookRedirect(req, res) {
+  passport.authenticate("facebook", { failureRedirect: "/login" }),
+    (function (req, res) {
+      // Aquí puedes redirigir al usuario a la página de inicio de sesión exitosa
+      console.log(req.user);
+      res.redirect("/");
+    })(req, res);
+}
 
 module.exports = {
   showHome,
   showSignUp,
   showLogin,
+  facebookLogin,
+  facebookRedirect,
 };

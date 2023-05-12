@@ -15,5 +15,7 @@ router.get("/users/registro", pageController.showSignUp);
 router.post("/users/registro", authController.signUp);
 router.get("/logout", authController.logOut);
 router.post("/articulos/:id", commentController.store);
+router.get("/auth/facebook", pageController.facebookLogin);
+router.get("/auth/facebook/callback", pageController.facebookRedirect);
 
 module.exports = router;

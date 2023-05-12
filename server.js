@@ -6,6 +6,7 @@ const routes = require("./routes");
 const session = require("express-session");
 const { passportConfig, passport } = require("./config/passport");
 const flash = require("express-flash");
+const { facebookConfig } = require("./config/facebook");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(passport.session());
 app.use(flash());
 
 passportConfig();
+facebookConfig();
 
 app.set("view engine", "ejs");
 
