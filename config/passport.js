@@ -33,5 +33,5 @@ function passportConfig() {
     }
   });
 }
-
+console.log("Hola");
 module.exports = { passportConfig, passport };
