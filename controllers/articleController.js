@@ -1,4 +1,4 @@
-const { Article, Comment, User } = require("../models");
+const { Article, Comment, User, Role } = require("../models");
 const { format } = require("date-fns");
 const { en } = require("date-fns/locale");
 const formidable = require("formidable");
@@ -10,7 +10,6 @@ async function index(req, res) {
     include: [User, Comment],
     sort: ["createdAt", "DESC"],
   });
-
   return res.render("home", { articles, format, en, google });
 }
 
@@ -30,7 +29,7 @@ async function show(req, res) {
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  return res.render("adminCreate", {google});
+  return res.render("adminCreate", { google });
 }
 
 // Store a newly created resource in storage.
@@ -57,9 +56,12 @@ async function edit(req, res) {
   const id = req.params.id;
   const article = await Article.findByPk(id, { include: "user" });
   if (req.user.id === article.user.id) {
-    return res.render("adminEdit", { article, id , google});
+    return res.render("adminEdit", { article, id, google });
   } else {
-    return res.render("forbidden", { message: "No tienes permiso para editar este artículo" , google: google});
+    return res.render("forbidden", {
+      message: "No tienes permiso para editar este artículo",
+      google: google,
+    });
   }
 }
 

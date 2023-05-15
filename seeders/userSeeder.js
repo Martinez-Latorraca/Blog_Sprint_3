@@ -1,5 +1,5 @@
 const { faker } = require("@faker-js/faker");
-const { User } = require("../models");
+const { User, Role } = require("../models");
 const bcrypt = require("bcryptjs");
 
 faker.locale = "es";

@@ -16,8 +16,6 @@ app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUniniti
 app.use(passport.session());
 app.use(flash());
 
-passportConfig();
-
 app.set("view engine", "ejs");
 
 routes(app);
