@@ -12,6 +12,7 @@ module.exports = async () => {
       fullname: faker.name.findName(),
       email: faker.internet.email(),
       password: bcrypt.hashSync(process.env.SESSION_CREDENTIAL, 10),
+      roleId: faker.datatype.number({ min: 1, max: 3 }),
     });
   }
 

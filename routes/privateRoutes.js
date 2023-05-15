@@ -5,12 +5,13 @@ const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
 const adminController = require("../controllers/adminController");
 const articleController = require("../controllers/articleController");
 
-router.get("/", ensureAuthenticated, adminController.show);
-router.get("/api/articulos", ensureAuthenticated, articleController.showApi);
-router.get("/crear", ensureAuthenticated, articleController.create);
-router.post("/crear", ensureAuthenticated, articleController.store);
-router.get("/:id/editar", ensureAuthenticated, articleController.edit);
-router.post("/:id/editar", ensureAuthenticated, articleController.update);
-router.get("/eliminar/:id", ensureAuthenticated, articleController.destroy);
+router.use(ensureAuthenticated.ensureAuthenticated);
+router.get("/", ensureAuthenticated.isEditor, adminController.show);
+router.get("/api/articulos", ensureAuthenticated.isAdmin, articleController.showApi);
+router.get("/crear", ensureAuthenticated.isWriter, articleController.create);
+router.post("/crear", ensureAuthenticated.isWriter, articleController.store);
+router.get("/:id/editar", ensureAuthenticated.isEditor, articleController.edit);
+router.post("/:id/editar", ensureAuthenticated.isEditor, articleController.update);
+router.get("/eliminar/:id", ensureAuthenticated.isAdmin, articleController.destroy);
 
 module.exports = router;

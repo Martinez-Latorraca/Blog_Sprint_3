@@ -10,12 +10,7 @@ async function show(req, res) {
     include: [User, Comment],
     sort: ["createdAt", "DESC"],
   });
-  articles &&
-    articles.forEach((article) => {
-      article.createdAt = format(article.createdAt, "yyyy'-'MM'-'dd hh:mm:ss", {
-        locale: es,
-      });
-    });
+
   return res.render("admin", { articles, format, es, sendEmail, google });
 }
 

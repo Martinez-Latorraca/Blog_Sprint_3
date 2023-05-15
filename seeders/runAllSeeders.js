@@ -17,9 +17,12 @@
 require("dotenv").config();
 
 async function runAllSeeders() {
+  await require("./roleSeeder")();
   await require("./userSeeder")();
+  await require("./permissionSeeder")();
   await require("./articleSeeder")();
   await require("./commentSeeder")();
+  await require("./permissionRoleSeeder")();
 
   console.log("[Database] ¡Los datos de prueba fueron insertados!");
 }

@@ -6,5 +6,15 @@ function ensureAuthenticated(req, res, next) {
     res.redirect("/login");
   }
 }
+function isAdmin(req, res, next) {
+  console.log(req.user.role);
+  req.user.role === process.env.IS_ADMIN ? next() : res.redirect("back");
+}
+function isEditor(req, res, next) {
+  req.user.role === process.env.IS_EDITOR ? next() : res.redirect("back");
+}
+function isWriter(req, res, next) {
+  req.user.role === process.env.IS_WRITER ? next() : res.redirect("back");
+}
 
-module.exports = ensureAuthenticated;
+module.exports = { ensureAuthenticated, isAdmin, isEditor, isWriter };

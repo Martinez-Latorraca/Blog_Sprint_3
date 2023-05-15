@@ -1,5 +1,4 @@
 const { passport } = require("../config/passport");
-const { sendEmail } = require("../middlewares/sendEmail");
 const { User } = require("../models");
 const bcrypt = require("bcryptjs");
 
