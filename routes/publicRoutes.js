@@ -17,5 +17,7 @@ router.get("/logout", authController.logOut);
 router.post("/articulos/:id", commentController.store);
 router.get("/auth/facebook", pageController.facebookLogin);
 router.get("/auth/facebook/callback", pageController.facebookRedirect);
+router.get("/auth/google", pageController.googleLogin);
+router.get("/auth/google/callback", pageController.googleRedirect);
 
 module.exports = router;

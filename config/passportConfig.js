@@ -4,9 +4,10 @@ const { User } = require("../models");
 
 module.exports = function (app) {
   app.use(passport.session());
-  
+
   require("./local")(passport);
   require("./facebook")(passport);
+  require("./google")(passport);
 
   passport.serializeUser((user, done) => {
     done(null, user.id);
